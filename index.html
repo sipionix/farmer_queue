@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d2a"><title>Farmer Queue | Smart Procurement</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="config.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="#"><span class="logo">🌾</span><span><b>Farmer Queue</b><small>SMART PROCUREMENT • FAIR ACCESS</small></span></a><div id="userArea" class="user-area"></div></header>
+<main class="wrap">
+  <section id="setupNotice" class="notice hidden"></section>
+  <section id="authView" class="auth-grid">
+    <div class="hero"><span class="eyebrow">🌱 DIGITAL AGRICULTURE</span><h1>Less waiting.<br><em>More farming.</em></h1><p>Book a procurement slot, keep your token safe, and track your visit without standing in an uncertain queue.</p><div class="hero-points"><span>✓ Date-wise slots</span><span>✓ Live booking status</span><span>✓ Digital receipt</span></div><div class="field-art">🌾　🌿　🌾</div></div>
+    <div class="panel auth-panel"><div class="tabs"><button class="tab active" data-auth="signin">Sign in</button><button class="tab" data-auth="signup">Create account</button></div>
+      <form id="authForm"><h2 id="authTitle">Welcome back</h2><p class="muted" id="authSubtitle">Sign in to manage your farmer bookings.</p>
+        <label>Full name <input id="authName" autocomplete="name" placeholder="e.g. Ramesh Kumar" class="signup-only hidden"></label>
+        <label>Email address<input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required></label>
+        <button class="btn primary full" id="authSubmit">Sign in securely →</button><p class="tiny muted">Demo uses Supabase Auth. Create an account, then sign in. Email confirmation may be required by your Supabase settings.</p><div id="authMessage" class="message"></div>
+      </form>
+    </div>
+  </section>
+  <section id="appView" class="hidden">
+    <div class="welcome"><div><span class="eyebrow">YOUR PROCUREMENT DESK</span><h1 id="welcomeTitle">Welcome back</h1><p class="muted">Book a visit, check your token, or review previous appointments.</p></div><div class="welcome-mark">🌱</div></div>
+    <nav class="nav"><button class="navbtn active" data-view="book">Book a slot</button><button class="navbtn" data-view="track">Track token</button><button class="navbtn" data-view="history">My history</button><button class="navbtn staff-only hidden" data-view="staff">Staff dashboard</button></nav>
+    <section id="bookView" class="view"><div class="section-head"><div><span class="eyebrow">NEW APPOINTMENT</span><h2>Reserve your slot</h2><p class="muted">Availability is stored in the shared database.</p></div><div class="pill">● Live database</div></div>
+      <div class="two-col"><form id="bookingForm" class="panel"><label>Farmer name<input id="farmerName" required maxlength="100" placeholder="Full name"></label><label>Mobile number<input id="phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number"></label><label>Procurement centre<select id="centre" required><option value="">Select centre</option><option>Central Procurement Centre</option><option>North Farm Collection Centre</option><option>Greenfield Mandi</option></select></label><label>Produce type<select id="produce" required><option value="">Select produce</option><option>Paddy / Rice</option><option>Wheat</option><option>Maize</option><option>Other</option></select></label><label>Booking date<input id="bookingDate" type="date" required></label><label>Time slot<select id="slot" required><option value="">Choose date first</option></select></label><button class="btn primary full" type="submit">Confirm booking →</button><div id="bookingMessage" class="message"></div></form>
+      <aside class="side-info"><div class="info-icon">🗓️</div><h3>Choose a quieter time</h3><p>Slots have different capacities. Once a slot fills up, the database rejects additional bookings automatically.</p><div class="mini-stat"><span>Token</span><b>Unique per booking</b></div><div class="mini-stat"><span>History</span><b>Saved to Supabase</b></div><div class="mini-stat"><span>Receipt</span><b>Download / print PDF</b></div></aside></div>
+    </section>
+    <section id="trackView" class="view hidden"><div class="section-head"><div><span class="eyebrow">TOKEN LOOKUP</span><h2>Track your booking</h2><p class="muted">Enter the token from your confirmation.</p></div></div><form id="trackForm" class="panel track-form"><label>Booking token<input id="trackToken" placeholder="FQ-XXXXXXXX" required></label><button class="btn primary">Find booking</button></form><div id="trackResult"></div></section>
+    <section id="historyView" class="view hidden"><div class="section-head"><div><span class="eyebrow">YOUR RECORDS</span><h2>Booking history</h2></div><button id="refreshHistory" class="btn secondary">↻ Refresh</button></div><div id="historyList" class="panel"><p class="muted">Loading bookings…</p></div></section>
+    <section id="staffView" class="view hidden"><div class="section-head"><div><span class="eyebrow">CENTRE OPERATIONS</span><h2>Staff dashboard</h2><button id="refreshStaff" class="btn secondary">↻ Refresh</button></div></div><div class="stats" id="staffStats"></div><div id="staffList" class="panel"><p class="muted">Loading bookings…</p></div></section>
+  </section>
+  <footer><span>🌾 Farmer Queue</span><span>Designed for transparent, organised procurement.</span></footer>
+</main>
+<div id="toast" role="status" class="toast hidden"></div>
+</body></html>
